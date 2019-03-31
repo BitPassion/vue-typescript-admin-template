@@ -135,18 +135,6 @@ export default new Router({
       ]
     },
     {
-      path: '/i18n',
-      component: Layout,
-      children: [
-        {
-          path: 'index',
-          component: () => import(/* webpackChunkName: "i18n" */ '@/views/i18n-demo/index.vue'),
-          name: 'I18n',
-          meta: { title: 'i18n', icon: 'international' }
-        }
-      ]
-    },
-    {
       path: 'external-link',
       component: Layout,
       children: [

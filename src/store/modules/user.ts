@@ -31,11 +31,6 @@ class User extends VuexModule implements IUserState {
     return ''
   }
 
-  @Mutation
-  private SET_TOKEN(token: string) {
-    this.token = token
-  }
-
   @MutationAction({ mutate: ['roles', 'name', 'avatar'] })
   public async GetUserInfo() {
     const token = getToken()
@@ -65,6 +60,11 @@ class User extends VuexModule implements IUserState {
       token: '',
       roles: []
     }
+  }
+
+  @Mutation
+  private SET_TOKEN(token: string) {
+    this.token = token
   }
 }
 
