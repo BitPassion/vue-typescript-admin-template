@@ -1,6 +1,6 @@
 <template>
   <a
-    v-if="isExternal(to)"
+    v-if="isExternalLink(to)"
     :href="to"
     target="_blank"
     rel="noopener"
@@ -19,12 +19,12 @@
 import { Component, Vue, Prop } from 'vue-property-decorator'
 import { isExternal } from '@/utils/validate'
 
-@Component({
-  methods: {
-    isExternal
-  }
-})
+@Component
 export default class Link extends Vue {
   @Prop({ required: true }) private to!: string;
+
+  private isExternalLink(routePath: string) {
+    return isExternal(routePath)
+  }
 }
 </script>
