@@ -11,7 +11,7 @@
       <div
         v-for="item of iconsMap"
         :key="item"
-        @click="handleCopy(generateIconCode(item), $event)"
+        @click="handleClipboard(generateIconCode(item), $event)"
       >
         <el-tooltip placement="top">
           <div slot="content">
@@ -31,17 +31,17 @@
 </template>
 
 <script lang="ts">
-import icons from './requireIcons'
+import { Component, Vue } from 'vue-property-decorator'
 import { handleClipboard } from '@/utils/clipboard'
-import { Vue, Component } from 'vue-property-decorator'
+import icons from './requireIcons'
 
-@Component
+@Component({
+  methods: {
+    handleClipboard
+  }
+})
 export default class Icons extends Vue {
   private iconsMap = icons
-
-  private handleCopy(text: string, event: Event) {
-    handleClipboard(text, event)
-  }
 
   private generateIconCode(symbol: string) {
     return `<svg-icon name="${symbol}" />`
