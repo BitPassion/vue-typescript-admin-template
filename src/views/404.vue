@@ -50,12 +50,14 @@
   </div>
 </template>
 
-<script lang="ts">
+<script lang='ts'>
 import { Component, Vue } from 'vue-property-decorator'
 
 @Component
 export default class NotFound extends Vue {
-  private message = '404 此页面不存在'
+  get message() {
+    return '404 此页面不存在'
+  }
 }
 </script>
 
