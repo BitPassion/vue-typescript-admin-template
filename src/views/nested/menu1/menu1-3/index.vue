@@ -9,8 +9,5 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
-
-@Component
-export default class Menu13 extends Vue {}
+export default {}
 </script>

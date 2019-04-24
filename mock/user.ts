@@ -1,3 +1,5 @@
+import { param2Obj } from './utils'
+
 const tokens: { [index: string]: any } = {
   admin: {
     token: 'admin-token'
@@ -22,62 +24,45 @@ const users: { [index: string]: any } = {
   }
 }
 
-export default [
-  // User login
-  {
-    url: '/user/login',
-    type: 'post',
-    response: (config: any) => {
-      const { username } = config.body
-      const token = tokens[username]
+export default {
+  login: (res: any) => {
+    const { username } = JSON.parse(res.body)
+    const data = tokens[username]
 
-      // Mock error
-      if (!token) {
-        return {
-          code: 60204,
-          message: 'Account and password are incorrect.'
-        }
-      }
-
+    if (data) {
       return {
         code: 20000,
-        data: token
+        data
       }
+    }
+
+    return {
+      code: 60204,
+      message: 'Account or password is incorrect.'
     }
   },
 
-  // Get user info
-  {
-    url: '/user/info',
-    type: 'get',
-    response: (config: any) => {
-      const { token } = config.query
-      const info = users[token]
+  getUserInfo: (res: any) => {
+    const { token } = param2Obj(res.url)
+    const info = users[token]
 
-      // Mock error
-      if (!info) {
-        return {
-          code: 50008,
-          message: 'Login failed, unable to get user details.'
-        }
-      }
-
+    if (info) {
       return {
         code: 20000,
         data: info
       }
     }
+
+    return {
+      code: 50008,
+      message: 'Login failed, unable to get user details.'
+    }
   },
 
-  // User logout
-  {
-    url: '/user/logout',
-    type: 'post',
-    response: (_: any) => {
-      return {
-        code: 20000,
-        data: 'success'
-      }
+  logout: () => {
+    return {
+      code: 20000,
+      data: 'success'
     }
   }
-]
+}
