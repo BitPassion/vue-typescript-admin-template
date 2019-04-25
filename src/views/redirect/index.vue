@@ -3,13 +3,13 @@ import { Component, Vue } from 'vue-property-decorator'
 
 @Component
 export default class Redirect extends Vue {
-  private beforeCreate() {
+  beforeCreate() {
     const { params, query } = this.$route
     const { path } = params
     this.$router.replace({ path: '/' + path, query })
   }
 
-  private render() {
+  render() {
     // avoid warning message
   }
 }

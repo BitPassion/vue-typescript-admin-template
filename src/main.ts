@@ -12,7 +12,6 @@ import router from '@/router'
 import i18n from './lang' // Internationalization
 import '@/icons/components'
 import '@/permission'
-import '@/utils/error-log' // Error log
 import '@/registerServiceWorker'
 
 import { mockXHR } from '../mock'

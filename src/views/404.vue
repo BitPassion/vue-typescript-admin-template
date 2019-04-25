@@ -28,23 +28,23 @@
           OOPS!
         </div>
         <div class="text-404__info">
-          All rights reserved
+          版权所有
           <a
-            style="color:#20a0ff"
+            class="link-type"
             href="https://wallstreetcn.com"
             target="_blank"
-          >wallstreetcn</a>
+          >华尔街见闻</a>
         </div>
         <div class="text-404__headline">
           {{ message }}
         </div>
         <div class="text-404__info">
-          Please check that the URL you entered is correct, or click the button below to return to the homepage.
+          请检查您输入的网址是否正确，请点击以下按钮返回主页或者发送错误报告
         </div>
         <a
-          href=""
+          href="/"
           class="text-404__return-home"
-        >Back to home</a>
+        >返回首页</a>
       </div>
     </div>
   </div>
@@ -54,13 +54,13 @@
 import { Component, Vue } from 'vue-property-decorator'
 
 @Component
-export default class Page404 extends Vue {
-  private message = '404 Page Not Found'
+export default class NotFound extends Vue {
+  private message = '404 此页面不存在'
 }
 </script>
 
 <style lang="scss" scoped>
-.wscn-http404-container {
+.wscn-http404-container{
   transform: translate(-50%,-50%);
   position: absolute;
   top: 40%;
