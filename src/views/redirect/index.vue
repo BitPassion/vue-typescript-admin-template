@@ -8,9 +8,5 @@ export default class Redirect extends Vue {
     const { path } = params
     this.$router.replace({ path: '/' + path, query })
   }
-
-  render() {
-    // avoid warning message
-  }
 }
 </script>

@@ -56,7 +56,6 @@
         <svg-icon
           v-for="n in +scope.row.importance"
           :key="n"
-          icon-class="star"
           name="star"
         />
       </template>
@@ -106,6 +105,7 @@ import * as filters from '@/filters'
 })
 export default class TabPane extends Vue {
   @Prop({ default: 'CN' }) private type!: string
+
   private list = null
   private listQuery = {
     page: 1,
@@ -115,7 +115,7 @@ export default class TabPane extends Vue {
   }
   private loading = false
 
-  private created() {
+  created() {
     this.getList()
   }
 
