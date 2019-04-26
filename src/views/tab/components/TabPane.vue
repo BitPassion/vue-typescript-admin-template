@@ -105,7 +105,6 @@ import * as filters from '@/filters'
 })
 export default class TabPane extends Vue {
   @Prop({ default: 'CN' }) private type!: string
-
   private list = null
   private listQuery = {
     page: 1,
@@ -115,7 +114,7 @@ export default class TabPane extends Vue {
   }
   private loading = false
 
-  created() {
+  private created() {
     this.getList()
   }
 

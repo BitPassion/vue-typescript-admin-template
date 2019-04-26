@@ -17,13 +17,13 @@ const sf = screenfull
 export default class Screenfull extends Vue {
   private isFullscreen = false
 
-  mounted() {
+  private mounted() {
     if (sf && sf.enabled) {
       sf.on('change', this.change)
     }
   }
 
-  beforeDestory() {
+  private beforeDestory() {
     if (sf && sf.enabled) {
       sf.off('change', this.change)
     }

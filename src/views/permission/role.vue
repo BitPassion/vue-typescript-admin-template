@@ -160,7 +160,7 @@ export default class RolePermission extends Vue {
     return this.generateTreeData(this.reshapedRoutes)
   }
 
-  created() {
+  private created() {
     // Mock: get all routes and roles list from server
     this.getRoutes()
     this.getRoles()
