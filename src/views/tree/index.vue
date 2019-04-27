@@ -23,7 +23,7 @@ import { TreeData } from 'element-ui/types/tree'
 
 @Component
 export default class Tree extends Vue {
-  private filterText = '';
+  private filterText = ''
   private data2 = [{
     id: 1,
     label: 'Level one 1',
@@ -58,15 +58,15 @@ export default class Tree extends Vue {
       id: 8,
       label: 'Level two 3-2'
     }]
-  }];
+  }]
   private defaultProps = {
     children: 'children',
     label: 'label'
-  };
+  }
 
   @Watch('filterText')
-  private onFilterTextChange(val: string) {
-    (this.$refs.tree2 as ElTree).filter(val)
+  private onFilterTextChange(value: string) {
+    (this.$refs.tree2 as ElTree).filter(value)
   }
 
   private filterNode(value: string, data: TreeData) {
