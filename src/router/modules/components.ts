@@ -6,10 +6,7 @@ const componentsRouter: RouteConfig = {
   component: Layout,
   redirect: 'noRedirect',
   name: 'ComponentDemo',
-  meta: {
-    title: 'components',
-    icon: 'component'
-  },
+  meta: { title: 'components', icon: 'component' },
   children: [
     {
       path: 'tinymce',
@@ -53,12 +50,12 @@ const componentsRouter: RouteConfig = {
     //   name: 'StickyDemo',
     //   meta: { title: 'Sticky' }
     // },
-    // {
-    //   path: 'count-to',
-    //   component: () => import('@/views/components-demo/count-to'),
-    //   name: 'CountToDemo',
-    //   meta: { title: 'Count To' }
-    // },
+    {
+      path: 'count-to',
+      component: () => import(/* webpackChunkName: "CountTo" */ '@/views/components-demo/count-to.vue'),
+      name: 'CountToDemo',
+      meta: { title: 'countTo' }
+    },
     // {
     //   path: 'mixin',
     //   component: () => import('@/views/components-demo/mixin'),

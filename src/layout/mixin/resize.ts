@@ -14,18 +14,18 @@ export default class ResizeMixin extends Vue {
   }
 
   @Watch('$route')
-  private onRouteChange() {
+  private OnRouteChange() {
     if (this.device === DeviceType.Mobile && this.sidebar.opened) {
       AppModule.CloseSideBar(false)
     }
   }
 
   beforeMount() {
-    window.addEventListener('resize', this.resizeHandler)
+    window.addEventListener('resize', this.$_resizeHandler)
   }
 
   mounted() {
-    const isMobile = this.isMobile()
+    const isMobile = this.$_isMobile()
     if (isMobile) {
       AppModule.ToggleDevice(DeviceType.Mobile)
       AppModule.CloseSideBar(true)
@@ -33,18 +33,21 @@ export default class ResizeMixin extends Vue {
   }
 
   beforeDestroy() {
-    window.removeEventListener('resize', this.resizeHandler)
+    window.removeEventListener('resize', this.$_resizeHandler)
   }
 
-  private isMobile() {
+  // use $_ for mixins properties
+  // https://vuejs.org/v2/style-guide/index.html#Private-property-names-essential
+  // eslint-disable-next-line camelcase
+  private $_isMobile() {
     const rect = document.body.getBoundingClientRect()
     return rect.width - 1 < WIDTH
   }
 
   // eslint-disable-next-line camelcase
-  private resizeHandler() {
+  private $_resizeHandler() {
     if (!document.hidden) {
-      const isMobile = this.isMobile()
+      const isMobile = this.$_isMobile()
       AppModule.ToggleDevice(isMobile ? DeviceType.Mobile : DeviceType.Desktop)
       if (isMobile) {
         AppModule.CloseSideBar(true)
