@@ -103,6 +103,22 @@ import { isValidUsername } from '@/utils/validate'
 import LangSelect from '@/components/LangSelect/index.vue'
 import SocialSign from './socialSignin.vue'
 
+const validateUsername = (rule: any, value: string, callback: any) => {
+  if (!isValidUsername(value)) {
+    callback(new Error('Please enter the correct user name'))
+  } else {
+    callback()
+  }
+}
+
+const validatePassword = (rule: any, value: string, callback: any) => {
+  if (value.length < 6) {
+    callback(new Error('The password can not be less than 6 digits'))
+  } else {
+    callback()
+  }
+}
+
 @Component({
   components: {
     LangSelect,
@@ -110,27 +126,13 @@ import SocialSign from './socialSignin.vue'
   }
 })
 export default class Login extends Vue {
-  private validateUsername = (rule: any, value: string, callback: Function) => {
-    if (!isValidUsername(value)) {
-      callback(new Error('Please enter the correct user name'))
-    } else {
-      callback()
-    }
-  }
-  private validatePassword = (rule: any, value: string, callback: Function) => {
-    if (value.length < 6) {
-      callback(new Error('The password can not be less than 6 digits'))
-    } else {
-      callback()
-    }
-  }
   private loginForm = {
     username: 'admin',
     password: '111111'
   }
   private loginRules = {
-    username: [{ validator: this.validateUsername, trigger: 'blur' }],
-    password: [{ validator: this.validatePassword, trigger: 'blur' }]
+    username: [{ required: true, trigger: 'blur', validator: validateUsername }],
+    password: [{ required: true, trigger: 'blur', validator: validatePassword }]
   }
   private passwordType = 'password'
   private loading = false
@@ -139,7 +141,7 @@ export default class Login extends Vue {
   private otherQuery: Dictionary<string> = {}
 
   @Watch('$route', { immediate: true })
-  private onRouteChange(route: Route) {
+  private OnRouteChange(route: Route) {
     // TODO: remove the "as Dictionary<string>" hack after v4 release for vue-router
     // See https://github.com/vuejs/vue-router/pull/2050 for details
     const query = route.query as Dictionary<string>

@@ -120,8 +120,8 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
-import { fetchList, IExampleArticleData } from '@/api/article'
+import { Component, Vue, Watch } from 'vue-property-decorator'
+import { fetchList } from '@/api/article'
 import * as filters from '@/filters'
 
 @Component({
@@ -138,7 +138,7 @@ import * as filters from '@/filters'
   }
 })
 export default class InlineEditTable extends Vue {
-  private list: IExampleArticleData[] = []
+  private list: any[] = []
   private listLoading = true
   private listQuery = {
     page: 1,

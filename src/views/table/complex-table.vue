@@ -150,7 +150,7 @@
       </el-table-column>
       <el-table-column
         :label="$t('table.importance')"
-        width="105px"
+        width="80px"
       >
         <template slot-scope="scope">
           <svg-icon
@@ -242,7 +242,7 @@
       <el-form
         ref="dataForm"
         :rules="rules"
-        :model="tempArticleData"
+        :model="temp"
         label-position="left"
         label-width="70px"
         style="width: 400px; margin-left:50px;"
@@ -252,7 +252,7 @@
           prop="type"
         >
           <el-select
-            v-model="tempArticleData.type"
+            v-model="temp.type"
             class="filter-item"
             placeholder="Please select"
           >
@@ -269,7 +269,7 @@
           prop="timestamp"
         >
           <el-date-picker
-            v-model="tempArticleData.timestamp"
+            v-model="temp.timestamp"
             type="datetime"
             placeholder="Please pick a date"
           />
@@ -278,11 +278,11 @@
           :label="$t('table.title')"
           prop="title"
         >
-          <el-input v-model="tempArticleData.title" />
+          <el-input v-model="temp.title" />
         </el-form-item>
         <el-form-item :label="$t('table.status')">
           <el-select
-            v-model="tempArticleData.status"
+            v-model="temp.status"
             class="filter-item"
             placeholder="Please select"
           >
@@ -296,7 +296,7 @@
         </el-form-item>
         <el-form-item :label="$t('table.importance')">
           <el-rate
-            v-model="tempArticleData.importance"
+            v-model="temp.importance"
             :colors="['#99A9BF', '#F7BA2A', '#FF9900']"
             :max="3"
             style="margin-top:8px;"
@@ -304,7 +304,7 @@
         </el-form-item>
         <el-form-item :label="$t('table.remark')">
           <el-input
-            v-model="tempArticleData.abstractContent"
+            v-model="temp.remark"
             :autosize="{minRows: 2, maxRows: 4}"
             type="textarea"
             placeholder="Please input"
@@ -363,7 +363,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import { Form } from 'element-ui'
-import { fetchList, fetchPv, createArticle, updateArticle, IExampleArticleData, defaultExampleArticleData } from '@/api/article'
+import { fetchList, fetchPv, createArticle, updateArticle } from '@/api/article'
 import { waves } from '@/directives/waves'
 import { exportJson2Excel } from '@/utils/excel'
 import { formatJson } from '@/utils'
@@ -407,7 +407,7 @@ const calendarTypeKeyValue = calendarTypeOptions.reduce((acc: { [key: string]: s
 })
 export default class ComplexTable extends Vue {
   private tableKey = 0
-  private list: IExampleArticleData[] = []
+  private list: any[] = []
   private total = 0
   private listLoading = true
   private listQuery = {
@@ -426,6 +426,16 @@ export default class ComplexTable extends Vue {
   ]
   private statusOptions = ['published', 'draft', 'deleted']
   private showReviewer = false
+  private temp = {
+    id: 0,
+    author: '',
+    importance: 1,
+    remark: '',
+    timestamp: +new Date(),
+    title: '',
+    type: '',
+    status: 'published'
+  }
   private dialogFormVisible = false
   private dialogStatus = ''
   private textMap = {
@@ -440,7 +450,6 @@ export default class ComplexTable extends Vue {
     title: [{ required: true, message: 'title is required', trigger: 'blur' }]
   }
   private downloadLoading = false
-  private tempArticleData = defaultExampleArticleData
 
   created() {
     this.getList()
@@ -488,12 +497,21 @@ export default class ComplexTable extends Vue {
     this.handleFilter()
   }
 
-  private resetTempArticleData() {
-    this.tempArticleData = defaultExampleArticleData
+  private resetTemp() {
+    this.temp = {
+      id: 0,
+      author: '',
+      importance: 1,
+      remark: '',
+      timestamp: +new Date(),
+      title: '',
+      status: 'published',
+      type: ''
+    }
   }
 
   private handleCreate() {
-    this.resetTempArticleData()
+    this.resetTemp()
     this.dialogStatus = 'create'
     this.dialogFormVisible = true
     this.$nextTick(() => {
@@ -504,10 +522,10 @@ export default class ComplexTable extends Vue {
   private createData() {
     (this.$refs['dataForm'] as Form).validate((valid) => {
       if (valid) {
-        this.tempArticleData.id = (Math.random() * 100 + 1024).toString() // mock a id
-        this.tempArticleData.author = 'vue-element-admin'
-        createArticle(this.tempArticleData).then(() => {
-          this.list.unshift(this.tempArticleData)
+        this.temp.id = Math.random() * 100 + 1024 // mock a id
+        this.temp.author = 'vue-element-admin'
+        createArticle(this.temp).then(() => {
+          this.list.unshift(this.temp)
           this.dialogFormVisible = false
           this.$notify({
             title: '成功',
@@ -521,8 +539,8 @@ export default class ComplexTable extends Vue {
   }
 
   private handleUpdate(row: any) {
-    this.tempArticleData = Object.assign({}, row) // copy obj
-    this.tempArticleData.timestamp = +new Date(this.tempArticleData.timestamp)
+    this.temp = Object.assign({}, row) // copy obj
+    this.temp.timestamp = +new Date(this.temp.timestamp)
     this.dialogStatus = 'update'
     this.dialogFormVisible = true
     this.$nextTick(() => {
@@ -533,13 +551,13 @@ export default class ComplexTable extends Vue {
   private updateData() {
     (this.$refs['dataForm'] as Form).validate((valid) => {
       if (valid) {
-        const tempData = Object.assign({}, this.tempArticleData)
+        const tempData = Object.assign({}, this.temp)
         tempData.timestamp = +new Date(tempData.timestamp) // change Thu Nov 30 2017 16:41:05 GMT+0800 (CST) to 1512031311464
         updateArticle(tempData).then(() => {
           for (const v of this.list) {
-            if (v.id === this.tempArticleData.id) {
+            if (v.id === this.temp.id) {
               const index = this.list.indexOf(v)
-              this.list.splice(index, 1, this.tempArticleData)
+              this.list.splice(index, 1, this.temp)
               break
             }
           }

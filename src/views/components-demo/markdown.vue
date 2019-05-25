@@ -75,7 +75,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
 import { AppModule } from '@/store/modules/app'
 import MarkdownEditor from '@/components/MarkdownEditor/index.vue'
 
