@@ -6,37 +6,25 @@ const chartsRouter: RouteConfig = {
   component: Layout,
   redirect: 'noredirect',
   name: 'Charts',
-  meta: {
-    title: 'charts',
-    icon: 'chart'
-  },
+  meta: { title: 'charts', icon: 'chart' },
   children: [
     {
-      path: 'bar-chart',
-      component: () => import(/* webpackChunkName: "bar-chart" */ '@/views/charts/bar-chart.vue'),
-      name: 'BarChart',
-      meta: {
-        title: 'barChart',
-        noCache: true
-      }
+      path: 'keyboard',
+      component: () => import(/* webpackChunkName: "keyboard" */ '@/views/charts/keyboard.vue'),
+      name: 'KeyboardChart',
+      meta: { title: 'keyboardChart', noCache: true }
     },
     {
-      path: 'line-chart',
-      component: () => import(/* webpackChunkName: "line-chart" */ '@/views/charts/line-chart.vue'),
+      path: 'line',
+      component: () => import(/* webpackChunkName: "line" */ '@/views/charts/line.vue'),
       name: 'LineChart',
-      meta: {
-        title: 'lineChart',
-        noCache: true
-      }
+      meta: { title: 'lineChart', noCache: true }
     },
     {
-      path: 'mixed-chart',
-      component: () => import(/* webpackChunkName: "mixed-chart" */ '@/views/charts/mixed-chart.vue'),
-      name: 'MixedChart',
-      meta: {
-        title: 'mixedChart',
-        noCache: true
-      }
+      path: 'mix-chart',
+      component: () => import(/* webpackChunkName: "mix-chart" */ '@/views/charts/mix-chart.vue'),
+      name: 'MixChart',
+      meta: { title: 'mixChart', noCache: true }
     }
   ]
 }

@@ -12,15 +12,14 @@ import router from '@/router'
 import i18n from '@/lang' // Internationalization
 import '@/icons/components'
 import '@/permission'
-import '@/utils/error-log'
+import '@/utils/error-log' // Error log
 import '@/registerServiceWorker'
-import * as filters from '@/filters'
 
 import { mockXHR } from '../mock'
 mockXHR()
 
 Vue.use(ElementUI, {
-  size: AppModule.size, // Set element-ui default size
+  size: AppModule.size, // set element-ui default size
   i18n: (key: string, value: string) => i18n.t(key, value)
 })
 
@@ -28,11 +27,6 @@ Vue.use(SvgIcon, {
   tagName: 'svg-icon',
   defaultWidth: '1em',
   defaultHeight: '1em'
-})
-
-// Register global filter functions
-Object.keys(filters).forEach(key => {
-  Vue.filter(key, (filters as { [key: string ]: Function })[key])
 })
 
 Vue.config.productionTip = false
