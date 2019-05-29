@@ -16,11 +16,10 @@
 import Dropzone from 'dropzone'
 import 'dropzone/dist/dropzone.css'
 import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
-
 Dropzone.autoDiscover = false
 
 @Component
-export default class DropzoneDemo extends Vue {
+export default class vmDropzoneDemo extends Vue {
   @Prop({ required: true }) private id!: string
   @Prop({ required: true }) private url!: string
   @Prop({ default: '' }) private clickable!: boolean | string | HTMLElement | (string | HTMLElement)[]
@@ -40,6 +39,7 @@ export default class DropzoneDemo extends Vue {
 
   mounted() {
     const element: HTMLElement | null = document.getElementById(this.id)
+    const vm = this
     if (element == null) return
     this.dropzone = new Dropzone(element)
     if (this.dropzone) {
@@ -71,6 +71,8 @@ export default class DropzoneDemo extends Vue {
           this.thumbnailHeight +
           'px" data-dz-thumbnail /></div>  <div class="dz-details"><div class="dz-size"><span data-dz-size></span></div> <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>  <div class="dz-error-message"><span data-dz-errormessage></span></div>  <div class="dz-success-mark"> <i class="material-icons">done</i> </div>  <div class="dz-error-mark"><i class="material-icons">error</i></div></div>',
         init() {
+          const val = vm.defaultImg
+          if (!val) return
           this.files.forEach(f => {
             if (f.xhr) {
               console.log(f.xhr.readyState)

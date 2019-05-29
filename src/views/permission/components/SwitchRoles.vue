@@ -25,7 +25,7 @@ export default class SwitchRoles extends Vue {
     return this.roles[0]
   }
 
-  set switchRoles(value) {
+  set switchRoles(value: string) {
     UserModule.ChangeRoles(value).then(() => {
       this.$emit('change')
     })

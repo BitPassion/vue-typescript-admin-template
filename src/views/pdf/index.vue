@@ -5,7 +5,7 @@
     </aside>
     <router-link
       target="_blank"
-      to="/pdf-download-example"
+      to="/pdf/download"
     >
       <el-button type="primary">
         Click to download PDF
