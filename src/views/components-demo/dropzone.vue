@@ -5,14 +5,16 @@
       <a
         class="link-type"
         href="https://github.com/rowanwins/vue-dropzone"
-      >vue-dropzone</a>.
+      >dropzone</a>
+      .
+      {{ $t('components.dropzoneTips') }}
     </aside>
     <div class="editor-container">
-      <dropzone
+      <Dropzone
         id="myVueDropzone"
         url="https://httpbin.org/post"
-        @dropzone-success="dropzoneSuccess"
-        @dropzone-removed-file="dropzoneRemovedFile"
+        @dropzone-removedFile="dropzoneR"
+        @dropzone-success="dropzoneS"
       />
     </div>
   </div>
@@ -28,11 +30,12 @@ import Dropzone from '@/components/Dropzone/index.vue'
   }
 })
 export default class DropzoneDemo extends Vue {
-  private dropzoneSuccess(file: File, response: any) {
+  private dropzoneS(file: File) {
+    console.log(file, 'file')
     this.$message({ message: 'Upload success', type: 'success' })
   }
-
-  private dropzoneRemovedFile(file: File, error: Error, xhr: XMLHttpRequest) {
+  private dropzoneR(file: File) {
+    console.log(file, 'file')
     this.$message({ message: 'Delete success', type: 'success' })
   }
 }

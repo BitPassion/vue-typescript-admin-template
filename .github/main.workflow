@@ -17,7 +17,7 @@ action "Filters for GitHub Actions" {
  action "Yarn build" {
   uses = "borales/actions-yarn@master"
   needs = ["Yarn install"]
-  args = "build:prod"
+  args = "build"
 }
 
 action "Deploy" {

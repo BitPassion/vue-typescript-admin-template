@@ -13,7 +13,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import { TagsViewModule } from '@/store/modules/tags-view'
+import { TagsViewModule } from '@/store/modules/tagsView'
 
 @Component
 export default class AppMain extends Vue {
@@ -22,7 +22,7 @@ export default class AppMain extends Vue {
   }
 
   get key() {
-    return this.$route.path
+    return this.$route.fullPath
   }
 }
 </script>

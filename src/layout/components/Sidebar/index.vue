@@ -1,6 +1,6 @@
 <template>
   <div :class="{'has-logo': showLogo}">
-    <sidebar-logo
+    <logo
       v-if="showLogo"
       :collapse="isCollapse"
     />
@@ -10,7 +10,7 @@
         :collapse="isCollapse"
         :background-color="variables.menuBg"
         :text-color="variables.menuText"
-        :active-text-color="menuActiveTextColor"
+        :active-text-color="variables.menuActiveText"
         :unique-opened="false"
         :collapse-transition="false"
         mode="vertical"
@@ -32,14 +32,14 @@ import { Component, Prop, Vue } from 'vue-property-decorator'
 import { AppModule } from '@/store/modules/app'
 import { PermissionModule } from '@/store/modules/permission'
 import { SettingsModule } from '@/store/modules/settings'
+import Logo from './Logo.vue'
 import SidebarItem from './SidebarItem.vue'
-import SidebarLogo from './SidebarLogo.vue'
-import variables from '@/styles/_variables.scss'
+import variables from '@/styles/variables.scss'
 
 @Component({
   components: {
-    SidebarItem,
-    SidebarLogo
+    Logo,
+    SidebarItem
   }
 })
 export default class SideBar extends Vue {
@@ -53,14 +53,6 @@ export default class SideBar extends Vue {
 
   get showLogo() {
     return SettingsModule.showSidebarLogo
-  }
-
-  get menuActiveTextColor() {
-    if (SettingsModule.sidebarTextTheme) {
-      return SettingsModule.theme
-    } else {
-      return variables.menuActiveText
-    }
   }
 
   get variables() {

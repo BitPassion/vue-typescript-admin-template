@@ -3,9 +3,9 @@ import { Message, MessageBox } from 'element-ui'
 import { UserModule } from '@/store/modules/user'
 
 const service = axios.create({
-  baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
+  baseURL: process.env.VUE_APP_MOCK_API, // url = base url + request url
+  withCredentials: true, // send cookies when cross-domain requests
   timeout: 5000
-  // withCredentials: true // send cookies when cross-domain requests
 })
 
 // Request interceptors
@@ -35,7 +35,7 @@ service.interceptors.response.use(
     const res = response.data
     if (res.code !== 20000) {
       Message({
-        message: res.message || 'Error',
+        message: res.message,
         type: 'error',
         duration: 5 * 1000
       })
@@ -53,7 +53,7 @@ service.interceptors.response.use(
           location.reload() // To prevent bugs from vue-router
         })
       }
-      return Promise.reject(new Error(res.message || 'Error'))
+      return Promise.reject(new Error('error with code: ' + res.code))
     } else {
       return response.data
     }

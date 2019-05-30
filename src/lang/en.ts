@@ -12,6 +12,7 @@ export default {
     tinymce: 'Tinymce',
     markdown: 'Markdown',
     jsonEditor: 'JSON Editor',
+    dndList: 'Dnd List',
     splitPane: 'SplitPane',
     avatarUpload: 'Avatar Upload',
     dropzone: 'Dropzone',
@@ -19,14 +20,13 @@ export default {
     countTo: 'Count To',
     componentMixin: 'Mixin',
     backToTop: 'Back To Top',
-    draggableDialog: 'Draggable Dialog',
-    draggableKanban: 'Draggable Kanban',
-    draggableList: 'Draggable List',
-    draggableSelect: 'Draggable Select',
+    dragDialog: 'Drag Dialog',
+    dragSelect: 'Drag Select',
+    dragKanban: 'Drag Kanban',
     charts: 'Charts',
-    barChart: 'Bar Chart',
+    keyboardChart: 'Keyboard Chart',
     lineChart: 'Line Chart',
-    mixedChart: 'Mixed Chart',
+    mixChart: 'Mix Chart',
     example: 'Example',
     nested: 'Nested Routes',
     menu1: 'Menu 1',
@@ -38,7 +38,7 @@ export default {
     menu2: 'Menu 2',
     table: 'Table',
     dynamicTable: 'Dynamic Table',
-    draggableTable: 'Draggable Table',
+    dragTable: 'Drag Table',
     inlineEditTable: 'Inline Edit',
     complexTable: 'Complex Table',
     tab: 'Tab',
@@ -100,6 +100,7 @@ export default {
   components: {
     documentation: 'Documentation',
     tinymceTips: 'Rich text is a core feature of the management backend, but at the same time it is a place with lots of pits. In the process of selecting rich texts, I also took a lot of detours. The common rich texts on the market have been basically used, and I finally chose Tinymce. See the more detailed rich text comparison and introduction.',
+    dropzoneTips: 'Because my business has special needs, and has to upload images to qiniu, so instead of a third party, I chose encapsulate it by myself. It is very simple, you can see the detail code in @/components/Dropzone.',
     stickyTips: 'when the page is scrolled to the preset position will be sticky on the top.',
     backToTopTips1: 'When the page is scrolled to the specified position, the Back to Top button appears in the lower right corner',
     backToTopTips2: 'You can customize the style of the button, show / hide, height of appearance, height of the return. If you need a text prompt, you can use element-ui el-tooltip elements externally',
@@ -117,7 +118,7 @@ export default {
     search: 'Search',
     add: 'Add',
     export: 'Export',
-    reviewer: 'Reviewer',
+    reviewer: 'reviewer',
     id: 'ID',
     date: 'Date',
     author: 'Author',
@@ -132,7 +133,7 @@ export default {
     confirm: 'Confirm'
   },
   example: {
-    warning: 'Creating and editing pages cannot be cached by keep-alive because keep-alive\'s \'include\' currently does not support caching based on routes, so now it\'s cached based on component name. If you want to achieve a similar caching effect, you can use a browser caching scheme such as localStorage. Or don\'t use keep-alive\'s \'include\' to cache all pages directly. See details'
+    warning: 'Creating and editing pages cannot be cached by keep-alive because keep-alive include does not currently support caching based on routes, so it is currently cached based on component name. If you want to achieve a similar caching effect, you can use a browser caching scheme such as localStorage. Or do not use keep-alive include to cache all pages directly. See details'
   },
   errorLog: {
     tips: 'Please click the bug icon in the upper right corner',
@@ -167,7 +168,6 @@ export default {
     theme: 'Theme Color',
     showTagsView: 'Open Tags-View',
     showSidebarLogo: 'Sidebar Logo',
-    fixedHeader: 'Fixed Header',
-    sidebarTextTheme: 'Sidebar Text Theme'
+    fixedHeader: 'Fixed Header'
   }
 }
