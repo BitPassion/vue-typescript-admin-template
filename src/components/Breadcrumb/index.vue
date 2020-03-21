@@ -22,7 +22,7 @@
 </template>
 
 <script lang="ts">
-import { compile } from 'path-to-regexp'
+import pathToRegexp from 'path-to-regexp'
 import { Component, Vue, Watch } from 'vue-property-decorator'
 import { RouteRecord, Route } from 'vue-router'
 
@@ -67,19 +67,17 @@ export default class extends Vue {
   private pathCompile(path: string) {
     // To solve this problem https://github.com/PanJiaChen/vue-element-admin/issues/561
     const { params } = this.$route
-    const toPath = compile(path)
+    const toPath = pathToRegexp.compile(path)
     return toPath(params)
   }
 
   private handleLink(item: any) {
-    // Throw Error "NavigationDuplicated"
-    // https://github.com/vuejs/vue-router/issues/2872
     const { redirect, path } = item
     if (redirect) {
-      this.$router.push(redirect).catch(_err => {})
+      this.$router.push(redirect)
       return
     }
-    this.$router.push(this.pathCompile(path)).catch(_err => {})
+    this.$router.push(this.pathCompile(path))
   }
 }
 </script>
