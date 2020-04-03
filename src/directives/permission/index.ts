@@ -11,10 +11,10 @@ export const permission: DirectiveOptions = {
         return permissionRoles.includes(role)
       })
       if (!hasPermission) {
-        el.style.display = 'none'
+        el.parentNode && el.parentNode.removeChild(el)
       }
     } else {
-      throw new Error(`need roles! Like v-permission="['admin','editor']"`)
+      throw new Error('need roles! Like v-permission="[\'admin\',\'editor\']"')
     }
   }
 }

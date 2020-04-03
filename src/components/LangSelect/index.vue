@@ -35,18 +35,12 @@
       >
         日本語
       </el-dropdown-item>
-      <el-dropdown-item
-        :disabled="language==='ko'"
-        command="ko"
-      >
-        한국어
-      </el-dropdown-item>
     </el-dropdown-menu>
   </el-dropdown>
 </template>
 
 <script lang="ts">
-import { Component, Vue, Watch } from 'vue-property-decorator'
+import { Component, Vue } from 'vue-property-decorator'
 import { AppModule } from '@/store/modules/app'
 
 @Component({

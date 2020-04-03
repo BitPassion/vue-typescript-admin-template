@@ -40,12 +40,6 @@
           >
             日本語
           </el-radio>
-          <el-radio
-            label="ko"
-            border
-          >
-            한국어
-          </el-radio>
         </el-radio-group>
         <el-tag
           style="margin-top: 15px; display: block;"
@@ -162,7 +156,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Watch } from 'vue-property-decorator'
+import { Component, Vue } from 'vue-property-decorator'
 import { AppModule } from '@/store/modules/app'
 import local from './local'
 
@@ -211,7 +205,6 @@ export default class extends Vue {
       this.$i18n.mergeLocaleMessage('zh', local.zh)
       this.$i18n.mergeLocaleMessage('es', local.es)
       this.$i18n.mergeLocaleMessage('ja', local.ja)
-      this.$i18n.mergeLocaleMessage('ko', local.ko)
     }
     this.setOptions() // set default select options
   }
